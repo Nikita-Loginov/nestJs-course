@@ -32,11 +32,13 @@ export class TaskService {
   }
 
   create(dto: CreateTaskDto) {
-    const { title } = dto;
+    const { title, priority, tags } = dto;
 
     const newTask = {
       id: this.tasks.length + 1,
       title,
+      priority,
+      tags,
       isCompleted: false,
     };
 
@@ -48,32 +50,27 @@ export class TaskService {
   update(id: number, dto: UpdateTaskDto) {
     const task = this.findById(id);
 
-    if (dto.title !== undefined) {
-      task.title = dto.title;
-    }
+    task.title = dto.title;
 
-    if (dto.isCompleted !== undefined) {
-      task.isCompleted = dto.isCompleted;
-    }
+    task.isCompleted = dto.isCompleted;
 
     return task;
   }
 
-  patchUpdateTask (id: number, dto: Partial<UpdateTaskDto>) {
+  patchUpdateTask(id: number, dto: Partial<UpdateTaskDto>) {
     const task = this.findById(id);
 
     const safeDto = { ...dto };
 
     const updatedTask = Object.assign(task, safeDto);
 
-    console.log(updatedTask)
-    return updatedTask
+    return updatedTask;
   }
 
-  delete (id: number) {
+  delete(id: number) {
     const task = this.findById(id);
-    
-    this.tasks = this.tasks.filter((task) => task.id !== id);
+
+    this.tasks = this.tasks.filter(task => task.id !== id);
 
     return true;
   }
