@@ -3,13 +3,13 @@ import { ReviewService } from './review.service';
 import { ReviewController } from './review.controller';
 import { ReviewEntity } from './entities/review.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MovieEntity } from 'src/movie/entities/movie.entity';
-import { MovieService } from 'src/movie/movie.service';
-import { ActorEntity } from 'src/actor/entities/actor.entity';
-import { PosterMovieEntity } from 'src/movie/entities/poster.entity';
+import { MovieEntity } from '../movie/entities/movie.entity';
+import { MovieService } from '../movie/movie.service';
+import { ActorEntity } from '../actor/entities/actor.entity';
+import { PosterMovieEntity } from '../movie/entities/poster.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ReviewEntity, MovieEntity, ActorEntity, PosterMovieEntity])],
+  // imports: [TypeOrmModule.forFeature([ReviewEntity, MovieEntity, ActorEntity, PosterMovieEntity])],
   controllers: [ReviewController],
   providers: [ReviewService, MovieService],
 })

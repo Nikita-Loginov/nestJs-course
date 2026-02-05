@@ -1,4 +1,4 @@
-import { ActorEntity } from "src/actor/entities/actor.entity";
+import { ActorEntity } from "src/modules/actor/entities/actor.entity";
 import { ReviewEntity } from "../../review/entities/review.entity";
 import {
   Column,
