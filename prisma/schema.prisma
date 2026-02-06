@@ -11,7 +11,7 @@ model Movie {
   id String @id @default(uuid())
 
   title       String
-  description String
+  description String?
   releaseYear Int    @map("release_year")
 
   rating Decimal @db.Decimal(3, 1) @default(0.0)
@@ -61,7 +61,7 @@ model Poster {
 
   url String
 
-  movie   Movie  @relation("movie_poster", fields: [movieId], references: [id])
+  movie   Movie  @relation("movie_poster", fields: [movieId], references: [id], onDelete: Cascade)
   movieId String @unique
 
   createdAt DateTime @default(now()) @map("created_at")

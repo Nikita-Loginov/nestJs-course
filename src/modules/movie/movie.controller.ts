@@ -1,33 +1,35 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from "@nestjs/common";
 import { MovieService } from "./movie.service";
 import { MovieDto } from "./dto/movie.dto";
 
 @Controller("movie")
 export class MovieController {
-  // constructor(private readonly movieService: MovieService) {}
+  constructor(private readonly movieService: MovieService) {}
 
-  // @Get()
-  // findAll() {
-  //   return this.movieService.findAll();
-  // }
+  @Get()
+  findAll(@Query() query: { limit?: string; page?: string }) {
+    const { limit, page } = query;
 
-  // @Get(":id")
-  // findById(@Param("id") id: string) {
-  //   return this.movieService.findById(id);
-  // }
+    return this.movieService.findAll({ limit: +limit, page: +page });
+  }
 
-  // @Post()
-  // create(@Body() dto: MovieDto) {
-  //   return this.movieService.create(dto);
-  // }
+  @Get(":id")
+  findById(@Param("id") id: string) {
+    return this.movieService.findById(id);
+  }
 
-  // @Put(":id")
-  // update(@Param("id") id: string, @Body() dto: MovieDto) {
-  //   return this.movieService.update(id, dto);
-  // }
+  @Post()
+  create(@Body() dto: MovieDto) {
+    return this.movieService.create(dto);
+  }
 
-  // @Delete(":id")
-  // delete(@Param("id") id: string) {
-  //   return this.movieService.delete(id);
-  // }
+  @Put(":id")
+  update(@Param("id") id: string, @Body() dto: MovieDto) {
+    return this.movieService.update(id, dto);
+  }
+
+  @Delete(":id")
+  delete(@Param("id") id: string) {
+    return this.movieService.delete(id);
+  }
 }

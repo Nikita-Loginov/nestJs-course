@@ -18,5 +18,6 @@ export class MovieDto {
 
   @IsArray()
   @IsUUID('4', {each: true})
+  @IsOptional()
   actorIds: string[]
 }
