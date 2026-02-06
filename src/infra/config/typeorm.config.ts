@@ -1,6 +1,5 @@
 import { ConfigService } from "@nestjs/config";
 import type { TypeOrmModuleOptions } from "@nestjs/typeorm";
-import { join } from "path";
 
 export const getTypeOrmConfig = async (
   configService: ConfigService
