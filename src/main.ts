@@ -6,6 +6,7 @@ import { AllExceptions } from "./common/filters/all-exceptions.filter";
 import { SwaggerModule } from "@nestjs/swagger";
 import { getSwaggerConfig } from "./infra/config/swagger.config";
 import { MovieModule } from "./modules/movie/movie.module";
+import { IoAdapter } from "@nestjs/platform-socket.io";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

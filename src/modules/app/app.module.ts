@@ -10,6 +10,7 @@ import { ReviewModule } from '../review/review.module';
 import { ActorModule } from '../actor/actor.module';
 import { PrismaModule } from "@/prisma/prisma.module";
 import { LoggerMiddleware } from "@/common/middlewares/logger.middleware";
+import { ChatModule } from "../chat/chat.module";
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { LoggerMiddleware } from "@/common/middlewares/logger.middleware";
     ReviewModule,
     ActorModule,
     PrismaModule,
+    ChatModule
   ],
   controllers: [AppController],
   providers: [AppService],

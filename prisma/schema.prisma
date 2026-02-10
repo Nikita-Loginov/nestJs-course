@@ -12,9 +12,9 @@ model Movie {
 
   title       String
   description String?
-  releaseYear Int    @map("release_year")
+  releaseYear Int     @map("release_year")
 
-  rating Decimal @db.Decimal(3, 1) @default(0.0)
+  rating Decimal @default(0.0) @db.Decimal(3, 1)
 
   genre Genre @default(DRAMA)
 
@@ -23,7 +23,7 @@ model Movie {
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
-  poster    Poster? @relation("movie_poster")
+  poster    Poster?  @relation("movie_poster")
 
   @@map("movies")
 }
@@ -32,7 +32,7 @@ model Review {
   id String @id @default(uuid())
 
   text   String
-  rating Decimal @db.Decimal(3, 1) @default(0.0)
+  rating Decimal @default(0.0) @db.Decimal(3, 1)
 
   movie   Movie  @relation(fields: [movieId], references: [id], onDelete: Cascade, "movie_reviews")
   movieId String
@@ -68,6 +68,17 @@ model Poster {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("posters")
+}
+
+model Message {
+  id String @id @default(uuid())
+
+  text String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("messages")
 }
 
 enum Genre {
