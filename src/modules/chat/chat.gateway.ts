@@ -11,11 +11,11 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer() server: Server
 
   handleConnection(client: Socket) {
-    console.log("connect", client.id);
+    // console.log("connect", client.id);
   }
 
   handleDisconnect(client: Socket) {
-    console.log("disconect", client.id);
+    // console.log("disconect", client.id);
   }
 
   @SubscribeMessage('sendMessage')

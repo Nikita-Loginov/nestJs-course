@@ -5,7 +5,7 @@ import { In, Repository } from "typeorm";
 import { MovieDto } from "./dto/movie.dto";
 import { ActorEntity } from "../actor/entities/actor.entity";
 import { PosterMovieEntity } from "./entities/poster.entity";
-import { PrismaService } from "@/prisma/prisma.service";
+import { PrismaService } from "../../prisma/prisma.service";
 @Injectable()
 export class MovieService {
   constructor(private readonly prisma: PrismaService) {}

@@ -10,7 +10,9 @@ export class AllExceptions implements ExceptionFilter {
 
     const response = context.getResponse() as Response;
 
+   
     const status = exception instanceof HttpException ? exception.getStatus() : 500;
+    
     const message =
       exception instanceof HttpException ? exception.message : "Internal server error";
 

@@ -8,9 +8,10 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { getTypeOrmConfig } from "../../infra/config/typeorm.config";
 import { ReviewModule } from '../review/review.module';
 import { ActorModule } from '../actor/actor.module';
-import { PrismaModule } from "@/prisma/prisma.module";
-import { LoggerMiddleware } from "@/common/middlewares/logger.middleware";
+import { PrismaModule } from "../../prisma/prisma.module";
+import { LoggerMiddleware } from "../../common/middlewares/logger.middleware";
 import { ChatModule } from "../chat/chat.module";
+import { PhoneModule } from "../phone/phone.module";
 
 @Module({
   imports: [
@@ -27,7 +28,8 @@ import { ChatModule } from "../chat/chat.module";
     ReviewModule,
     ActorModule,
     PrismaModule,
-    ChatModule
+    ChatModule,
+    PhoneModule
   ],
   controllers: [AppController],
   providers: [AppService],

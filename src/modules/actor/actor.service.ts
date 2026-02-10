@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { ActorEntity } from "./entities/actor.entity";
 import { Repository } from "typeorm";
 import { ActorDto } from "./dto/actor.dto";
-import { PrismaService } from "@/prisma/prisma.service";
+import { PrismaService } from "../../prisma/prisma.service";
 
 @Injectable()
 export class ActorService {

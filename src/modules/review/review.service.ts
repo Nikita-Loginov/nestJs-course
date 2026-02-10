@@ -4,7 +4,7 @@ import { ReviewEntity } from "./entities/review.entity";
 import { Repository } from "typeorm";
 import { CreateReviewDto } from "./dto/create-review.dto";
 import { MovieService } from "../movie/movie.service";
-import { PrismaService } from "@/prisma/prisma.service";
+import { PrismaService } from "../../prisma/prisma.service";
 
 @Injectable()
 export class ReviewService {

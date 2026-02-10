@@ -13,7 +13,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
-  app.useGlobalFilters(new AllExceptions());
+  // app.useGlobalFilters(new AllExceptions());
 
   const config = getSwaggerConfig();
   const documentFactory = () => SwaggerModule.createDocument(app, config, {

@@ -81,6 +81,18 @@ model Message {
   @@map("messages")
 }
 
+model Phone {
+  id String @id @default(uuid())
+
+  price Int
+  brand String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("phones")
+}
+
 enum Genre {
   DRAMA
   COMEDY

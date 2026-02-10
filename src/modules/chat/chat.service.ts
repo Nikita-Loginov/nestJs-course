@@ -1,7 +1,6 @@
-import { PrismaService } from "@/prisma/prisma.service";
+import { PrismaService } from "../../prisma/prisma.service";
 import { Body, Injectable } from "@nestjs/common";
 import { SendMessageDto } from "./dto/send-message.dto";
-import { text } from "node:stream/consumers";
 
 @Injectable()
 export class ChatService {
