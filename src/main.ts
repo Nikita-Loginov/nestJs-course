@@ -7,9 +7,20 @@ import { SwaggerModule } from "@nestjs/swagger";
 import { getSwaggerConfig } from "./infra/config/swagger.config";
 import { MovieModule } from "./modules/movie/movie.module";
 import { IoAdapter } from "@nestjs/platform-socket.io";
+import { ConfigService } from "@nestjs/config";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  const configService = app.get(ConfigService)
+
+  app.enableCors({
+    origin: configService.getOrThrow<string>('ALLOWED_ORIGINS').split(','),
+    credentials: true,
+    methos: ['GET', 'POST', 'DELETE', 'PATCH', 'PUT'],
+    exposedHeaders: ['Set-Cookie'],
+    allowedHeaders: ['Authorization', 'X-Api-Key'],
+  })
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -18,12 +29,6 @@ async function bootstrap() {
       transform: true,
     })
   );
-
-  app.enableCors({
-    origin: ['http://127.0.0.1:5500'], // сюда добавляешь адрес фронта
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    credentials: true,
-  });
 
   // app.useGlobalFilters(new AllExceptions());
 

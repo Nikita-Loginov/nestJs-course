@@ -1,30 +1,32 @@
 import { generateCodeChallenge, generateCodeVerifier } from "@/infra/utils/pkce.util";
 import { PrismaService } from "@/prisma/prisma.service";
 import { HttpService } from "@nestjs/axios";
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import * as crypto from "crypto";
 import { firstValueFrom } from "rxjs";
 import { GetTracksDto } from "./dto/get-tracks.dto";
 import { GetTrackStreamsDto } from "./dto/get-tracks-stream.dto";
 import { Response } from "express";
+import { ISoundcloundOptions, SoundcloundOptionsSymbol } from './interface/soundclound-options.interface';
 
 @Injectable()
 export class SoundcloudService {
-  private client_id: string;
-  private redirect_uri: string;
-  private client_secret: string;
+  // private client_id: string;
+  // private redirect_uri: string;
+  // private client_secret: string;
 
   private stateStore = new Map<string, string>();
 
   constructor(
-    private readonly configService: ConfigService,
+    @Inject(SoundcloundOptionsSymbol) private options: ISoundcloundOptions,
+    // private readonly configService: ConfigService,
     private readonly httpService: HttpService,
     private readonly prisma: PrismaService
   ) {
-    this.client_id = this.configService.getOrThrow<string>("SOUNDCLOUD_CLIENT_ID");
-    this.client_secret = this.configService.getOrThrow<string>("SOUNDCLOUD_SECRET_ID");
-    this.redirect_uri = this.configService.getOrThrow<string>("SOUNDCLOUD_REDIRECT_URI");
+    // this.client_id = this.configService.getOrThrow<string>("SOUNDCLOUD_CLIENT_ID");
+    // this.client_secret = this.configService.getOrThrow<string>("SOUNDCLOUD_SECRET_ID");
+    // this.redirect_uri = this.configService.getOrThrow<string>("SOUNDCLOUD_REDIRECT_URI");
   }
 
   async authorization(userId: string) {
@@ -46,8 +48,8 @@ export class SoundcloudService {
 
     const url =
       `https://secure.soundcloud.com/authorize` +
-      `?client_id=${this.client_id}` +
-      `&redirect_uri=${encodeURIComponent(this.redirect_uri)}` +
+      `?client_id=${this.options.client_id}` +
+      `&redirect_uri=${encodeURIComponent(this.options.redirect_uri)}` +
       `&response_type=code` +
       `&state=${state}`;
 
@@ -67,10 +69,10 @@ export class SoundcloudService {
   async getToken(code: string, userId: string) {
     const body = new URLSearchParams({
       grant_type: "authorization_code",
-      client_id: this.client_id,
-      client_secret: this.client_secret,
+      client_id: this.options.client_id,
+      client_secret: this.options.client_secret,
       code,
-      redirect_uri: this.redirect_uri,
+      redirect_uri: this.options.redirect_uri,
     });
 
     const { data } = await firstValueFrom(
