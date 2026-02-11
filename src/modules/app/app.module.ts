@@ -12,6 +12,8 @@ import { PrismaModule } from "../../prisma/prisma.module";
 import { LoggerMiddleware } from "../../common/middlewares/logger.middleware";
 import { ChatModule } from "../chat/chat.module";
 import { PhoneModule } from "../phone/phone.module";
+import { SoundcloudModule } from "@/soundcloud/soundclound.module";
+import { HttpModule } from "@nestjs/axios";
 
 @Module({
   imports: [
@@ -29,13 +31,10 @@ import { PhoneModule } from "../phone/phone.module";
     ActorModule,
     PrismaModule,
     ChatModule,
-    PhoneModule
+    PhoneModule,
+    SoundcloudModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule  implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes('*')
-  }
-}
+export class AppModule {}
